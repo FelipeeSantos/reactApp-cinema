@@ -52,17 +52,17 @@ jobs:
       - run:
           name: Deploy to AWS S3
           command: |
-            if [ "${CIRCLE_BRUNCH}" == "master" ]
+            if [ "${CIRCLE_BRANCH}" == "master" ]
             then
               aws --region ${AWS_REGION} s3 sync ~/repo/build s3://${AWS_BUCKET_PRODUCTIONN} --delete
-            elif [ "${CIRCLE_BRUNCH}" == "staging" ]
+            elif [ "${CIRCLE_BRANCH}" == "staging" ]
             then
               aws --region ${AWS_REGION} s3 sync ~/repo/build s3://${AWS_BUCKET_STAGINGG} --delete
             else
               aws --region ${AWS_REGION} s3 sync ~/repo/build s3://${AWS_BUCKET_DEV} --delete
             fi
 
-  deploy-to-aws-cloudFront:
+  deploy-to-aws-cloudfront:
     docker:
       - image: circleci/node:14.5.0
     working_directory: /~repo
@@ -70,7 +70,7 @@ jobs:
       - checkout
       - run:
           name: Show current branch
-          command: echo ${CIRCLE_BRUNCH}
+          command: echo ${CIRCLE_BRANCH}
       - run:
           name: Installing AWS CLI
           working_directory: /
@@ -90,10 +90,10 @@ jobs:
           name: Deploy too AWS Cloudfront
           command: |
             aws configure set preview.cloudfront true
-            if [ "${CIRCLE_BRUNCH}" == "master" ]
+            if [ "${CIRCLE_BRANCH}" == "master" ]
             then
               aws cloudfront create-invalidate --distribution-id ${AWS_CLOUDFRONT_PRODUCTIONN} --paths /\*
-            elif [ "${CIRCLE_BRUNCH}" == "staging" ]
+            elif [ "${CIRCLE_BRANCH}" == "staging" ]
             then
               aws cloudfront create-invalidate --distribution-id ${AWS_CLOUDFRONT_STAGINGG} --paths /\*
             else
