@@ -11,9 +11,10 @@ aliases:
       name: Show current branch
       command: echo ${CIRCLE_BRANCH}
   - &restore-cache
-    keys:
-      - app-{{ checksum "package.json" }}
-      - app-
+    restore_cache:
+      keys:
+        - app-{{ checksum "package.json" }}
+        - app-
   - &install-dependencies
     run:
       name: Install dependencies
@@ -86,9 +87,8 @@ jobs:
     steps:
       - checkout
       - *show-current-branch-name
-      - *restore-cache
-      - *install-dependencies
-      - *save-cache
+      - *install-aws-cli
+      - *build-project
       - run:
           name: Deploy too AWS Cloudfront
           command: |
@@ -110,6 +110,12 @@ workflows:
       - linting:
           requires:
             - build
+          filters:
+            branches:
+              only:
+                - Develop
+                - staging
+                - master
       - deploy-to-aws-s3:
           requires:
             - linting
