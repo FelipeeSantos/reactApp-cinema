@@ -50,7 +50,7 @@ jobs:
             zip ../build.zip -r * .[^.]*
             echo "Build successful"
       - run:
-          name: Deploy too AWS S3
+          name: Deploy to AWS S3
           command: |
             if [ "${CIRCLE_BRUNCH}" == "master" ]
             then
@@ -100,11 +100,11 @@ jobs:
               aws cloudfront create-invalidate --distribution-id ${AWS_CLOUDFRONT_DEVE} --paths /\*
             fi
 
-  workflows:
-    build_and_deploy:
-      jobs:
-        - build
-        - deploy-to-aws-s3:
+workflows:
+  build_and_deploy:
+    jobs:
+      - build
+      - deploy-to-aws-s3:
           requires:
             - build
           filters:
@@ -113,13 +113,13 @@ jobs:
                 - Develop
                 - staging
                 - master
-        - deploy-to-aws-cloudfront:
-            requires:
-              - deploy-to-aws-s3
-            filters:
-              branches:
-                only:
-                  - Develop
-                  - staging
-                  - master
+      - deploy-to-aws-cloudfront:
+          requires:
+            - deploy-to-aws-s3
+          filters:
+            branches:
+              only:
+                - Develop
+                - staging
+                - master
 
