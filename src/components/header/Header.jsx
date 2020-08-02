@@ -73,7 +73,7 @@ const Header = () => {
             }
             <input
               className="header-nav--search-input"
-              placeholder="Search for a movie"
+              placeholder="Search a movie"
               type="text"
             />
           </ul>
