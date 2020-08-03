@@ -1,0 +1,26 @@
+.main-content {
+  margin-bottom: 50px;
+
+  &-movie {
+    color: #FFF;
+    display: grid;
+    font-size: 18px;
+    grid-template-areas: "main-content-movie--title . main-content-movie--paginate";
+    grid-auto-columns: max-content 1fr max-content;
+    grid-template-rows: 1fr;
+    margin-bottom: 30px;
+    width: inherit;
+
+    &--title {
+      grid-area: main-content-movie--title;
+      padding: 8px 25px;
+      text-align: left;
+    }
+
+    &--paginate {
+      grid-area: main-content-movie--paginate;
+      padding: 25px;
+      text-align: right;
+    }
+  }
+}

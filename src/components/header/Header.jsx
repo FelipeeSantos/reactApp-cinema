@@ -39,7 +39,9 @@ const Header = () => {
     setNavClass(navClass);
     setMenuClass(menuClass);
 
-    navClass ? document.body.classList.add("header-nav-open") : document.body.classList.remove("header-nav-open");
+    navClass
+      ? document.body.classList.add("header-nav-open")
+      : document.body.classList.remove("header-nav-open");
   };
 
   return (
@@ -50,12 +52,23 @@ const Header = () => {
           <div className="header-navbar--image">
             <img src={logo} alt="Logo site" />
           </div>
-          <div className={`${menuClass ? "header-menu-toggle is-active" : "header-menu-toggle header-menu-toggle--mobile"}`} onClick={() => toggleMenu()}>
+          <div
+            className={`${
+              menuClass
+                ? "header-menu-toggle is-active"
+                : "header-menu-toggle header-menu-toggle--mobile"
+            }`}
+            onClick={() => toggleMenu()}
+          >
             <span className="header-menu-toggle--bar" />
             <span className="header-menu-toggle--bar" />
             <span className="header-menu-toggle--bar" />
           </div>
-          <ul className={`${navClass ? "header-nav header-nav--mobile" : "header-nav"}`}>
+          <ul
+            className={`${
+              navClass ? "header-nav header-nav--mobile" : "header-nav"
+            }`}
+          >
             {headerList.map((data) => (
               <li key={data.id} className="header-nav--item">
                 <span className="header-nav--list">
@@ -65,7 +78,11 @@ const Header = () => {
                 <span className="header-nav--list-name">{data.name}</span>
               </li>
             ))}
-            <input className="header-nav--search-input" placeholder="Search a movie" type="text" />
+            <input
+              className="header-nav--search-input"
+              placeholder="Search a movie"
+              type="text"
+            />
           </ul>
         </div>
       </div>
