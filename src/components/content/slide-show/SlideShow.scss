@@ -1,0 +1,153 @@
+.slider {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+.slider-image {
+  color: #fff;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 700px;
+  text-align: center;
+}
+
+.slider-nav {
+  align-content: center;
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  order: 2;
+}
+
+.slider-nav-button {
+  background: none;
+  border: 0;
+  height: 20px;
+  opacity: 0.5;
+  outline: none !important;
+  padding: 0;
+  position: relative;
+  transition: opacity 0.25s;
+  width: 20px;
+
+  &::after {
+    background: #345;
+    border-radius: 50%;
+    content: "";
+    display: block;
+    height: 6px;
+    left: 7px;
+    position: absolute;
+    top: 7px;
+    width: 6px;
+  }
+}
+
+.slider-nav-button--active {
+  opacity: 1;
+
+  &::after {
+    height: 12px;
+    left: 4px;
+    opacity: 1;
+    top: 4px;
+    width: 12px;
+  }
+}
+
+.slider-arrows {
+  height: 0;
+  left: 0;
+  position: absolute;
+  top: calc(50% - 35px);
+  width: 100%;
+  z-index: 1;
+}
+
+.slider-arrow {
+  background: none;
+  border: none;
+  cursor: pointer;
+  height: 40px;
+  opacity: 0.5;
+  outline: none !important;
+  padding: 0;
+  position: absolute;
+  transition: opacity 0.25s;
+  width: 21px;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  &::after,
+  &::before {
+    background: #fff;
+    border-radius: 3px;
+    content: "";
+    display: block;
+    height: 23px;
+    left: 8px;
+    position: absolute;
+    width: 5px;
+  }
+
+  &::before {
+    top: 0;
+  }
+
+  &::after {
+    bottom: 0;
+  }
+}
+
+.slider-arrow--left {
+  left: 10px;
+  opacity: 1;
+  top: 0;
+
+  &::before {
+    transform: rotate(30deg);
+  }
+
+  &::after {
+    transform: rotate(-30deg);
+  }
+}
+
+.slider-arrow--right {
+  opacity: 1;
+  right: 10px;
+  top: 0;
+
+  &::before {
+    transform: rotate(-30deg);
+  }
+
+  &::after {
+    transform: rotate(30deg);
+  }
+}
+
+.indicators {
+  list-style: none;
+  padding: 0;
+  text-align: center;
+  li {
+    background: white;
+    border: 2px solid blue;
+    border-radius: 50%;
+    cursor: pointer;
+    display: inline-block;
+    height: 25px;
+    margin: 0 10px;
+    width: 25px;
+
+    &.active {
+      background: blue;
+    }
+  }
+}
